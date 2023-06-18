@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Instructions:
 
-## Getting Started
+In this lab we will be using the jsonplaceholder API.
+Add react-router-dom and redux toolkit to the list of dependncies before you start.
 
-First, run the development server:
+1- Fetch the list of users in this end point:
+https://jsonplaceholder.typicode.com/users
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+2- Create a store and save the fetched users into that store. Your store should reflect wither the request is done or is still loading.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3- Display the list of users in a Table in the `ListUsers.jsx` component.
+The Table column should be :
+Id, Name, Email, Phone, Action.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+4- In the `AddUser.jsx` we should be able to add a new user to that store, and see the changes in the Table from previous component immediatly. After the user is added make sure the router take the user to the home page.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+5- In the `ListUsers.jsx` the Action column should have a Buttnon labled as Delete. Once the user Clicks the button the user should be deleted from the store.
 
-## Learn More
+6- In the home page we should be able to see the List of users, and there should be a button to take us to the `AddUser.jsx` component.
 
-To learn more about Next.js, take a look at the following resources:
+7- Style to impress :)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+BONUS: Have a number that indicate how many users are in the store, and it should update if we add or remove.
