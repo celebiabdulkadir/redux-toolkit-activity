@@ -5,11 +5,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/counter/user';
+import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 
 const schema = yup.object().shape({
 	name: yup.string().trim('No leading/trailing whitepaces allowed').required(),
-	email: yup.string().required().email(),
-	phone: yup.string().trim('No leading/trailing whitepaces allowed').required(),
+	email: yup
+		.string()
+		.trim('No leading/trailing whitepaces allowed')
+		.required()
+		.email(),
+	phone: yup
+		.string()
+		.trim('No leading/trailing whitepaces allowed')
+		.matches(/^[0-9]+$/, 'Only numbers are allowed')
+		.min(8, 'Must be at least 8 characters')
+		.required('Required'),
 });
 
 function AddUser({ isModalOpen, handleCloseModal }) {
@@ -32,6 +42,18 @@ function AddUser({ isModalOpen, handleCloseModal }) {
 		dispatch(addUser(user));
 		reset();
 		handleCloseModal();
+		enqueueSnackbar('Created Successfully', {
+			variant: 'success',
+			autoHideDuration: 3000,
+		});
+	};
+
+	const getFormErrorMessage = (name) => {
+		return errors[name] ? (
+			<small className='text-red-600'>{errors[name].message}</small>
+		) : (
+			<small className='text-red-600'>&nbsp;</small>
+		);
 	};
 
 	if (!isModalOpen) {
@@ -68,13 +90,7 @@ function AddUser({ isModalOpen, handleCloseModal }) {
 												{...field}
 												className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 											/>
-											<p
-												className={`text-red-600 ${
-													errors.name ? '' : 'invisible'
-												}`}
-											>
-												{errors.field?.name}
-											</p>
+											{getFormErrorMessage(field.name)}
 										</div>
 									)}
 								/>
@@ -88,10 +104,13 @@ function AddUser({ isModalOpen, handleCloseModal }) {
 									control={control}
 									defaultValue=''
 									render={({ field }) => (
-										<input
-											{...field}
-											className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-										/>
+										<div>
+											<input
+												{...field}
+												className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+											/>
+											{getFormErrorMessage(field.name)}
+										</div>
 									)}
 								/>
 							</div>
@@ -104,10 +123,13 @@ function AddUser({ isModalOpen, handleCloseModal }) {
 									control={control}
 									defaultValue=''
 									render={({ field }) => (
-										<input
-											{...field}
-											className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-										/>
+										<div>
+											<input
+												{...field}
+												className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+											/>
+											{getFormErrorMessage(field.name)}
+										</div>
 									)}
 								/>
 							</div>
