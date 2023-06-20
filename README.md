@@ -20,4 +20,8 @@ Id, Name, Email, Phone, Action.
 
 7- Style to impress :)
 
+### Live
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/45e248f8-f8fc-4aad-99b6-94b94f2dc2e6/deploy-status)](https://redux-toolkit-recoded.netlify.app/)
+
 BONUS: Have a number that indicate how many users are in the store, and it should update if we add or remove.
